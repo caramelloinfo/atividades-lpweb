@@ -55,4 +55,5 @@ export class AppComponent {
   selecionar(disciplina) {
     this.selecionado = disciplina;
   }
+ 
 }

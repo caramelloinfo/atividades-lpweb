@@ -1,30 +1,47 @@
-<h1>Disciplinas</h1>
+<br>
+<h1>Lista de Disciplinas</h1>
 <hr>
-<table border="1">
-  <tr>
-    <th>código</th>
-    <th>nome</th>
-    <th>detalhes</th>
-  </tr>
-  <tr *ngFor="let disciplina of disciplinas">
-    <td>{{disciplina.codigo}}</td>
-    <td [class.selecionado]="selecionado==disciplina">{{disciplina.nome}}</td>
-    <td (click)="selecionar(disciplina)">
-      <button type="button" class="btn btn-link">Detalhes</button>
-    </td>
-    <td *ngIf="selecionado == disciplina">
-      <table border="1">
-        <tr>
-          <th>Nome</th>
-          <th>Professor</th>
-          <th>Descrição</th>
-        </tr>
-        <tr>
-          <td>{{disciplina.nome}}</td>
-          <td>{{disciplina.professor.nome}}</td>
-          <td>{{disciplina.descricao}}</td>
-        </tr>
-      </table>
-    </td>
-  </tr>
+<table class="table">
+  <thead>
+    <tr class="bg-dark">
+      <th class="text-white">#</th>
+      <th class="text-white">Nome</th>
+      <th class="text-white">Detalhes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let disciplina of disciplinas">
+      <td>{{disciplina.codigo}}</td>
+      <td>{{disciplina.nome}}</td>
+      <td (click)="selecionar(disciplina)">
+        <button type="button" class="btn btn-outline-success" >+</button>
+      </td>
+    </tr>
+    <tbody>
 </table>
+
+<div class="card border-success mb-" style="max-width: 100rem;" *ngIf="selecionado != disciplina">
+  <div class="card-header bg-transparent border-success"><h5>Disciplina detalhada ::</h5></div>
+  <div class="card-body text-dark">
+    <table class="table" *ngIf="selecionado != disciplina">
+      <thead class="card-text">
+        <tr>
+            
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>Nome: </b><i>{{selecionado.nome}}</i></td> 
+        </tr>
+        <tr>
+          <td><b>Professor(a): </b><i>{{selecionado.professor.nome}}</i> </td> 
+        </tr>
+        <tr>
+          <td><b>Descrição: </b><i>{{selecionado.descricao}}</i></td> 
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<br>
+<br>
