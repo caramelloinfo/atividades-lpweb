@@ -61,6 +61,12 @@ export class AppComponent {
     this.selecionado = disciplina;
   }
   salvar(){
+    this.codigo = null;
+    this.nome = null;
+    this.descricao = null;
+    this.limpar();
+  }
+  criar(){
     const d = new Disciplina(this.codigo, this.nome, this.descricao);
     this.disciplinas.push(d);
     this.codigo = null;
@@ -76,5 +82,6 @@ export class AppComponent {
     }
 
   }
- 
+  
+  
 }

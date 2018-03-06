@@ -1,7 +1,8 @@
 <!-- CRUD disciplina 05/03/2018 -->
 <br>
 <h1>Disciplinas
-  <button type="button" class="btn btn-outline-primary">nova</button>
+  <button type="button" class="btn btn-outline-primary" [(ngModel)]="ngForm">nova</button>
+  <div id="cadastro"> </div>
 </h1>
 <hr>
 <table class="table">
@@ -17,34 +18,45 @@
       <td>{{disciplina.codigo}}</td>
       <td>{{disciplina.nome}}</td>
       <td>
-        <button type="button" class="btn btn-outline-success">Editar</button>
+        <button type="button" class="btn btn-outline-success" (click)="selecionar(disciplina)">Editar</button>
         <button type="button" class="btn btn-outline-danger" (click)="excluir(disciplina)">Excluir</button>
       </td>
     </tr>
   </tbody>
 </table>
 <hr>
-<h2>Cadastrar</h2>
-<p>Use este formulário para cadastrar uma disciplina.</p>
-<form #cadastro="ngForm" (submit)="salvar()">
-    <div>
-        <label for="nome">Código</label><br>
-        <input type="number" id="codigo" name="codigo" [(ngModel)]="codigo" required>
-    </div>
-    <div>
-        <label for="nome">Nome</label><br>
-        <input type="text" id="nome" name="nome" [(ngModel)]="nome" required>
-    </div>
-    <div>
-        <label for="descricao">Descrição</label><br>
-        <textarea id="descricao" name="descricao" [(ngModel)]="descricao"
-                  cols="70" rows="5">
+<div *ngIf="selecionado != disciplina">
+  <h2>Cadastrar</h2>
+  <p>Use este formulário para cadastrar uma disciplina.</p>
+  <div *ngFor="let disciplina of disciplinas">
+    <form #cadastro="ngForm" (submit)="salvar()">
+
+      <div *ngIf="selecionado == disciplina">
+        
+          <label for="nome">Código</label>
+          <br>
+          <input type="number" id="codigo" name="codigo" [(ngModel)]="disciplina.codigo" placeholder="codigo" required>
+          <br>
+          <label for="nome">Nome</label>
+          <br>
+          <input type="text" id="nome" name="nome" [(ngModel)]="disciplina.nome" placeholder="nome" required>
+          <br>
+          <label for="descricao">Descrição</label>
+          <br>
+          <textarea id="descricao" name="descricao" [(ngModel)]="disciplina.descricao" cols="70" rows="5" placeholder="descricao">
         </textarea>
+        
+        <button type="submit" class="btn btn-primary" [disabled]="!cadastro.valid" >
+          Salvar
+        </button>
+        <button type="submit" class="btn btn-primary" [disabled]="!cadastro.valid" (click)="criar()">
+            Criar
+          </button>
+      </div>
+    </form>
     </div>
-    <button type="submit" class="btn btn-primary" [disabled]="!cadastro.valid">
-        Salvar
-    </button>
-</form>
+  
+</div>
 
 
 
