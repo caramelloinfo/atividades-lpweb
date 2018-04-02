@@ -15,66 +15,96 @@ disciplina:
 
 <div class="container">
   <br>
-  <h1>Disciplinas
-    <button type="button" class="btn btn-outline-primary" (click)="criar()">nova</button>
-  </h1>
+  <h1>Ocorrências</h1>
   <hr>
   <table class="table">
     <thead>
       <tr class="bg-dark">
-        <th class="text-white">Código</th>
-        <th class="text-white">Nome</th>
-        <th class="text-white">Detalhes</th>
+        <th class="text-white">Data</th>
+        <th class="text-white">Matrícula</th>
+        <th class="text-white">Nome do aluno</th>
+        <th class="text-white">Tipo da ocorrência</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let disciplina of disciplinas">
-        <td>{{disciplina.codigo}}</td>
-        <td>{{disciplina.nome}}</td>
-        <td>
-          <button type="button" class="btn btn-outline-success" (click)="selecionar(disciplina)">Editar</button>
-          <button type="button" class="btn btn-outline-danger" (click)="excluir(disciplina)">Excluir</button>
-        </td>
+      <tr *ngFor="let ocorrencia of ocorrencias">
+        <td>{{ocorrencia.data}}</td>
+        <td>{{ocorrencia.matricula}}</td>
+        <td>{{ocorrencia.nomeAluno}}</td>
+        <td>{{ocorrencia.tipoOcorrencia}}</td>
+
       </tr>
     </tbody>
   </table>
   <hr>
-  <div *ngIf="selecionado != disciplina">
-    <h2>Cadastrar</h2>
-    <p>Use este formulário para cadastrar uma disciplina.</p>
-    <div *ngFor="let disciplina of disciplinas">
-      <form #cadastro="ngForm" (submit)="salvar()">
 
-        <div *ngIf="selecionado == disciplina">
-
-          <label for="nome">Código</label>
-          <br>
-          <input type="number" id="codigo" name="codigo" [(ngModel)]="disciplina.codigo" placeholder="codigo" required>
-          <br>
-          <label for="nome">Nome</label>
-          <br>
-          <input type="text" id="nome" name="nome" [(ngModel)]="disciplina.nome" placeholder="nome" required>
-          <br>
-          <label for="descricao">Descrição</label>
-          <br>
-          <textarea id="descricao" name="descricao" [(ngModel)]="disciplina.descricao" cols="70" rows="5" placeholder="descricao">
-        </textarea>
-
-          <button type="submit" class="btn btn-outline-primary" [disabled]="!cadastro.valid">
-            Salvar
-          </button>
-          <button type="submit" class="btn btn-dark" [disabled]="!cadastro.valid" >
-            Cancelar
-          </button>
-        </div>
-      </form>
+  <h2>Cadastrar</h2>
+  <p>Use este formulário para cadastrar uma ocorrência.</p>
+  <form #cadastro="ngForm" (submit)="criar()">
+    <div class="form-group">
+      <label for="data">Data</label>
+      <br>
+      <input type="text" id="data" name="data" class="form-control" [(ngModel)]="data" required>
     </div>
 
-  </div>
+    <div class="form-group">
+      <label for="matricula">Matrícula</label>
+      <br>
+      <input type="number" id="matricula" name="matricula" class="form-control" [(ngModel)]="matricula" required>
+    </div>
 
-</div><!--container-->
+    <div class="form-group">
+      <label for="nomeAluno">Nome do aluno</label>
+      <br>
+      <input type="text" id="nomeAluno" name="nomeAluno" class="form-control" [(ngModel)]="nomeAluno" required>
+    </div>
+
+    <div class="form-group">
+      <label class="input-group-text" for="tipoOcorrencia">Tipo da ocorrência</label>
+      <br>
+      <select class="custom-select" id="tipoOcorrencia">
+        <option selected>...</option>
+        <option *ngFor="let ocorrencia of ocorrencias" type="text" id="tipoOcorrencia" name="tipoOcorrencia" class="form-control"
+          [(ngModel)]="tipoOcorrencia" required>{{ocorrencia.tipoOcorrencia}}</option>
+
+      </select>
+    </div>
+
+    <hr>
+    <p>Adicionar pais ou reponsáveis?</p>
+    <button class="btn btn-primary" (click)="addPais()">
+        <i class="fa fa-save"></i> Sim
+      </button>
+
+
+    <div class="text-right">
+      <button type="submit" class="btn btn-primary" [disabled]="!cadastro.valid">
+        <i class="fa fa-save"></i> Criar
+      </button>
+      <button type="reset" class="btn btn-secondary" (click)="cancelar()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+
+  <h2>Pais ou Responsáveis</h2>
+  <hr>
+  <form #cadastro="ngForm" (submit)="addPais()">
+    <div class="form-group">
+      <label for="nomeAluno">Nome</label>
+      <br>
+      <input type="text" id="nomeAluno" name="nomeAluno" class="form-control" [(ngModel)]="nomeAluno" required>
+    </div>
+
+    <div class="text-right">
+      <button type="submit" class="btn btn-primary" [disabled]="!cadastro.valid">
+        <i class="fa fa-save"></i> Criar
+      </button>
+      <button type="reset" class="btn btn-secondary" (click)="cancelar()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>
+<!--container-->
 <br>
-
-
-
-
