@@ -1,18 +1,3 @@
-<!-- CRUD disciplina 05/03/2018 - 12/03/2018
-
-disciplina:
-- código
-- nome
-- descrição
-- data (automático se possível)
-- está ativo? (checkbox)
-- tipo (principal ou secundária -> select ou radio)
-- período (1... 8 -> select)
-** salvar as informações no browser +++ local storage
-
-
--->
-
 <div class="container">
   <br>
   <h1>Ocorrências</h1>
@@ -36,15 +21,22 @@ disciplina:
       </tr>
     </tbody>
   </table>
+  <p>% indisciplina em sala de aula: {{media1}}</p>
+  <p>% comportamento inadequado com os colegas: {{media2}}</p>
+  <p>% baixo índice de rendimento: {{media3}}</p>
+  <p>% indicação de atenção por assunto familiar, psicológico ou social: {{media4}}</p>
   <hr>
 
   <h2>Cadastrar</h2>
   <p>Use este formulário para cadastrar uma ocorrência.</p>
+  <div *ngIf="criar_ok" class="alert alert-success">
+    <strong>Sucesso!</strong> A ocorrência foi cadastrada com sucesso.
+  </div>
   <form #cadastro="ngForm" (submit)="criar()">
     <div class="form-group">
       <label for="data">Data</label>
       <br>
-      <input type="text" id="data" name="data" class="form-control" [(ngModel)]="data" required>
+      <input type="date" id="data" name="data" class="form-control" [(ngModel)]="data" required>
     </div>
 
     <div class="form-group">
@@ -60,22 +52,10 @@ disciplina:
     </div>
 
     <div class="form-group">
-      <label class="input-group-text" for="tipoOcorrencia">Tipo da ocorrência</label>
+      <label for="tipoOcorrencia">Tipo da ocorrência</label>
       <br>
-      <select class="custom-select" id="tipoOcorrencia">
-        <option selected>...</option>
-        <option *ngFor="let ocorrencia of ocorrencias" type="text" id="tipoOcorrencia" name="tipoOcorrencia" class="form-control"
-          [(ngModel)]="tipoOcorrencia" required>{{ocorrencia.tipoOcorrencia}}</option>
-
-      </select>
+      <input type="text" id="tipoOcorrencia" name="tipoOcorrencia" class="form-control" [(ngModel)]="tipoOcorrencia" required>
     </div>
-
-    <hr>
-    <p>Adicionar pais ou reponsáveis?</p>
-    <button class="btn btn-primary" (click)="addPais()">
-        <i class="fa fa-save"></i> Sim
-      </button>
-
 
     <div class="text-right">
       <button type="submit" class="btn btn-primary" [disabled]="!cadastro.valid">
@@ -89,22 +69,7 @@ disciplina:
 
   <h2>Pais ou Responsáveis</h2>
   <hr>
-  <form #cadastro="ngForm" (submit)="addPais()">
-    <div class="form-group">
-      <label for="nomeAluno">Nome</label>
-      <br>
-      <input type="text" id="nomeAluno" name="nomeAluno" class="form-control" [(ngModel)]="nomeAluno" required>
-    </div>
-
-    <div class="text-right">
-      <button type="submit" class="btn btn-primary" [disabled]="!cadastro.valid">
-        <i class="fa fa-save"></i> Criar
-      </button>
-      <button type="reset" class="btn btn-secondary" (click)="cancelar()">
-        Cancelar
-      </button>
-    </div>
-  </form>
+  
 </div>
 <!--container-->
 <br>
