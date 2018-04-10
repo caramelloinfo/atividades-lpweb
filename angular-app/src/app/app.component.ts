@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { Ocorrencia } from './ocorrencia.model';
-import { del } from 'selenium-webdriver/http';
+import {Component} from '@angular/core';
+import {TipoDeOcorrencia} from "./tipo-de-ocorrencia.model";
+import {Ocorrencia} from "./ocorrencia.model";
 
 @Component({
   selector: 'app-root',
@@ -8,70 +8,77 @@ import { del } from 'selenium-webdriver/http';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
+  ocorrencias = [];
+  aluno_matricula = null;
+  aluno_nome = null;
   data = null;
-  matricula = null;
-  nomeAluno = null;
-  tipoOcorrencia = null;
-  criar_ok = false;
-  tipo1 = null;
-  tipo2 = null;
-  tipo3 = null;
-  tipo4 = null;
-  media1: number = null;
-  media2: number = null;
-  media3: number = null;
-  media4: number = null;
+  pai_ou_responsavel_compareceu = false;
+  pai_ou_responsavel_nome = null;
+  tipo = null;
+  observacao = null;
+  salvar_ok = false;
 
-  ocorrencias = [
-    new Ocorrencia('2018/03/23', 201801, 'Ana Souza', 'indisciplina em sala de aula'),
-    new Ocorrencia('2018/03/23', 201801, 'Bruno Cardoso', 'comportamento inadequado com os colegas'),
-    new Ocorrencia('2018/03/23', 201801, 'Carlos Rodrigues', 'baixo índice de rendimento'),
-    new Ocorrencia('2018/03/23', 201801, 'Débora Silva', 'indicação de atenção por assunto familiar, psicológico ou social'),
+  contadores = [0, 0, 0, 0];
+  porcentagens = [0, 0, 0, 0];
+  cont_abril = 0;
+  cont_marco = 0;
+  relacao_ocorrencias = 0;
+
+  tipos = [
+    new TipoDeOcorrencia(0, 'indisciplina em sala de aula'),
+    new TipoDeOcorrencia(1, 'comportamento inadequado com colegas'),
+    new TipoDeOcorrencia(2, 'baixo índice de rendimento'),
+    new TipoDeOcorrencia(3, 'indicação de atenção por assunto familiar, psicológico ou social')
   ];
 
-  
-  criar() {
-    const oc = new Ocorrencia(this.data, this.matricula, this.nomeAluno, this.tipoOcorrencia);
-    this.ocorrencias.push(oc);
-    this.data = null;
-    this.matricula = null;
-    this.nomeAluno = null;
-    this.tipoOcorrencia = null;
-    this.criar_ok = true;
-
+  salvar() {
+    const ocorrencia = new Ocorrencia(this.aluno_matricula,
+      this.aluno_nome,
+      this.data,
+      this.pai_ou_responsavel_compareceu,
+      this.pai_ou_responsavel_nome,
+      this.observacao,
+      this.tipo);
+    this.ocorrencias.push(ocorrencia);
+    this.salvar_ok = true;
+    this.atualizarEstatisticas();
+    this.iniciar();
   }
 
-  ocorrenciasTipo() {
-    let cont1: number = 0;
-    let cont2: number = 0;
-    let cont3: number = 0;
-    let cont4: number = 0;
-    let contTudo: number = 0;
-    for (let i = 0; i < this.ocorrencias.length; i++) {
-      if (this.tipoOcorrencia == 'indisciplina em sala de aula') {
-        cont1++;
+
+  atualizarEstatisticas() {
+    this.contadores = [0, 0, 0, 0];
+    this.cont_abril = 0;
+    this.cont_marco = 0;
+    for (var i = 0; i < this.ocorrencias.length; i++) {
+      this.contadores[this.ocorrencias[i].tipo]++;
+      if (this.ocorrencias[i].data.indexOf("-04-") != -1) {
+        this.cont_abril++;
       }
-      if (this.tipoOcorrencia == 'comportamento inadequado com os colegas') {
-        cont2++;
+      if (this.ocorrencias[i].data.indexOf('-03-') != -1) {
+        this.cont_marco++;
       }
-      if (this.tipoOcorrencia == 'baixo índice de rendimento') {
-        cont3++;
-      }
-      if (this.tipoOcorrencia == 'indicação de atenção por assunto familiar, psicológico ou social') {
-        cont4++;
-      }
-      contTudo = cont1 + cont2 + cont3 + cont4;
-      this.media1 = cont1 * contTudo / 100;
-      this.media2 = cont2 * contTudo / 100;
-      this.media3 = cont3 * contTudo / 100;
-      this.media4 = cont4 * contTudo / 100;
     }
-
+    if (this.cont_marco != 0) {
+      this.relacao_ocorrencias = (this.cont_abril - this.cont_marco)/this.cont_marco * 100;
+    }
+    for (var i = 0; i < 4; i++) {
+      this.porcentagens[i] = this.contadores[i] / this.ocorrencias.length * 100;
+    }
   }
-  
 
+  cancelar() {
+    this.iniciar();
+    this.salvar_ok = false;
+  }
+
+  iniciar() {
+    this.aluno_matricula = null;
+    this.aluno_nome = null;
+    this.data = null;
+    this.pai_ou_responsavel_compareceu = false;
+    this.pai_ou_responsavel_nome = null;
+    this.tipo = null;
+    this.observacao = null;
+  }
 }
-
-
-
