@@ -1,4 +1,36 @@
-<!-- CRUD disciplina 05/03/2018 -->
+<div class="App">
+  <div class="app-wrapper">
+    <app-header></app-header>
+    <app-form-input></app-form-input>
+  <div *ngFor="let disciplina of disciplinaService.getDisciplinas()">
+    <app-item-disciplina [disciplina]="disciplina"></app-item-disciplina>
+
+  </div>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- CRUD disciplina 05/03/2018 
 <br>
 <h1>Disciplinas
   <button type="button" class="btn btn-outline-primary" [(ngModel)]="ngForm">nova</button>
@@ -120,4 +152,4 @@
   </div>
 </div>
 <br>
-<br>
+<br> -->

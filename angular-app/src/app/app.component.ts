@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Disciplina} from './disciplina.model';
 import {Professor} from './professor.model';
 import { del } from 'selenium-webdriver/http';
+import {DisciplinaService} from './services/disciplina.service';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,10 @@ import { del } from 'selenium-webdriver/http';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  constructor(private disciplinaService: DisciplinaService){
+    
+  }
 
   codigo = null;
   nome = null;
@@ -64,7 +69,7 @@ export class AppComponent {
     this.codigo = null;
     this.nome = null;
     this.descricao = null;
-    this.limpar();
+  
   }
   criar(){
     const d = new Disciplina(this.codigo, this.nome, this.descricao);
