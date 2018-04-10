@@ -3,17 +3,18 @@ export class Ocorrencia {
   aluno_nome: string;
   data: string;
   pai_ou_responsavel_compareceu: boolean;
-  pai_ou_responsavel_nome: string;
-  observacao: string;
+  pai_ou_responsavel_nome?: string;
+  observacao?: string;
   tipo: number;
 
   constructor(aluno_matricula: string,
               aluno_nome: string,
               data: string,
+              tipo: number,
               pai_ou_responsavel_compareceu: boolean,
-              pai_ou_responsavel_nome: string,
-              observacao: string,
-              tipo: number) {
+              pai_ou_responsavel_nome?: string,
+              observacao?: string,
+              ) {
     this.aluno_matricula = aluno_matricula;
     this.aluno_nome = aluno_nome;
     this.data = data;

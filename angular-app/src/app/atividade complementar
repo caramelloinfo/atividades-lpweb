@@ -1,0 +1,16 @@
+Entendo a Atividade
+
+b) relação entre quantidade de ocorrências do mês atual (abril) e do mês anterior (março), 
+em porcentagem. Use a equação: (qa-qu)/qu, onde qa indica a quantidade de ocorrências do mês 
+atual e qu, do mês anterior;
+
+qa: abril
+qu: março
+
+Atividade Complementar 
+
+c) Se a relação (r) for maior ou igual a 0%, deve ser apresentada no formato +r% (ex.: +20%) 
+e na cor vermelha. Caso contrário, deve ser apresentada no formato -r% (ex.: -20%) e na cor verde;
+
+d) O sistema deve permitir que o usuário indique um intervalo de datas (data inicial e data final) 
+e deve identificar e apresentar a quantidade de ocorrências nesse intervalo.
