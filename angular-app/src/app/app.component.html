@@ -6,6 +6,21 @@
   </li>
 </ul>
 
+<hr>
+<h2>Consulta</h2>
+<p>Consulta por período.</p>
+<form #pesquisa="ngForm" (submit)="pesquisar()">
+  <label>Data inicial:</label>  <input type="date" id="data_inicial" name="data_inicial" [(ngModel)]="data_inicial">
+  <label>Data final:</label>  <input type="date" id="data_final" name="data_final" [(ngModel)]="data_final">
+  <button type="submit">Ok</button>
+    <ul>
+      <li *ngFor="let pesquisa of pesquisa_periodo">
+        {{ ocorrencia.data}} - {{ocorrencia.aluno_matricula}} - {{ocorrencia.aluno_nome}} - {{tipos[ocorrencia.tipo].nome}}
+      </li>
+    </ul>
+</form>
+<hr>
+
 <h2>Estatísticas</h2>
 <ul>
   <li *ngFor="let tipo of tipos">

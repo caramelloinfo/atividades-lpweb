@@ -19,6 +19,9 @@ export class AppComponent {
   salvar_ok = false;
   maior_igual_zero = false;
   maior_igual_zero_false = false;
+  data_inicial = null;
+  data_final = null;
+  pesquisa_periodo = [];
 
   contadores = [0, 0, 0, 0];
   porcentagens = [0, 0, 0, 0];
@@ -92,7 +95,16 @@ export class AppComponent {
       this.porcentagens[i] = this.contadores[i] / this.ocorrencias.length * 100;
     }
   }
-
+  pesquisar(){
+    for (let i=0; i < this.ocorrencias.length; i++ ){
+      if ((this.data >= this.data_inicial)&&(this.data <= this.data_final)){
+        this.pesquisa_periodo=this.ocorrencias;
+      }
+      else{
+        return "Não existe cadastro de ocorrência nesse período.";
+      }
+  }
+  }
   cancelar() {
     this.iniciar();
     this.salvar_ok = false;
