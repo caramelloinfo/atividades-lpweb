@@ -23,11 +23,28 @@ export class AppComponent {
   data_final = null;
   pesquisa_periodo = [];
 
+  datainicial = null;
+  datafinal = null;
+  resultado = [];
+
   contadores = [0, 0, 0, 0];
   porcentagens = [0, 0, 0, 0];
   cont_abril = 0;
   cont_marco = 0;
   relacao_ocorrencias = 0;
+
+  pesquisa(){
+    this.datainicial = Date.parse(this.datainicial);
+    this.datafinal = Date.parse(this.datafinal);
+    
+
+    for(let o of this.ocorrencias){
+      var result = o.data;
+      if((result <= this.datafinal ) && (result >= this.datainicial)){
+        this.resultado.push(o);
+      }
+    }
+  }
 
   tipos = [
     new TipoDeOcorrencia(0, 'indisciplina em sala de aula'),
@@ -35,13 +52,7 @@ export class AppComponent {
     new TipoDeOcorrencia(2, 'baixo índice de rendimento'),
     new TipoDeOcorrencia(3, 'indicação de atenção por assunto familiar, psicológico ou social')
   ];
-   /*aluno_matricula: string,
-              aluno_nome: string,
-              data: string,
-              tipo: number,
-              pai_ou_responsavel_compareceu?: boolean,
-              pai_ou_responsavel_nome?: string,
-              observacao?: string*/
+   
   ocorrencias = [
     new Ocorrencia('201801', 'Ana', '2018-04-19', 0, true),
     new Ocorrencia('201802', 'Bruno', '2018-04-19', 1, false),
@@ -105,6 +116,7 @@ export class AppComponent {
       }
   }
   }
+  
   cancelar() {
     this.iniciar();
     this.salvar_ok = false;
