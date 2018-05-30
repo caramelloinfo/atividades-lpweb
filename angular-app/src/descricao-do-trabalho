@@ -1,0 +1,11 @@
+O gerenciador deve implementar um CRUD de Turma e, opcionalmente, de Disciplinla, Professor e Aluno. A lista de turmas deve apresentar uma lista contendo:
+
+id
+nome da disciplina
+nome do professor
+quantidade de alunos
+Além disso, deve permitir excluir, editar e cadastrar uma turma. No cadastro da turma, o formulário deve permitir escolher (não digitar): disciplina, professor e alunos; deve permitir digitar o ano.
+
+O Gerenciador Escolar deve consultar a API HTTP REST criada com o json-server.
+
+Responder com a URL do repositório do Github que implemente essa atividade.
